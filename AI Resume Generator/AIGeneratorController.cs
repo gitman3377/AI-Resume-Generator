@@ -5,10 +5,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace AI_Resume_Generator
 {
-	public class AIGeneratorController: ApiController
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    public class AIGeneratorController: ApiController
     {
 		[HttpPost]
 		[Route("api/AIGenerator/ManageUsers")]
