@@ -26,7 +26,6 @@ namespace AI_Resume_Generator
                 cmd.Parameters.AddWithValue("@i_user_id", obj.userid);
                 cmd.Parameters.AddWithValue("@i_email", obj.email);
                 cmd.Parameters.AddWithValue("@i_password", hashedPassword);
-                cmd.Parameters.AddWithValue("@i_created_date", obj.date);
                 cmd.Parameters.AddWithValue("@i_process_by", obj.process_by);
 				cmd.CommandType = CommandType.StoredProcedure;
 				cmd.Transaction = Transaction;

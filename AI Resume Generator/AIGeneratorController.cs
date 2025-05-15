@@ -9,7 +9,6 @@ using System.Web.Http.Cors;
 
 namespace AI_Resume_Generator
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AIGeneratorController: ApiController
     {
 		[HttpPost]

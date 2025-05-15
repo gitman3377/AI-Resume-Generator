@@ -17,7 +17,6 @@ namespace AI_Resume_Generator
 			public int userid { get; set; }
 			public string email { get; set; }
 			public string password { get; set; }
-			public string date { get; set; }
             public string process_by { get; set; }
         }
 }
