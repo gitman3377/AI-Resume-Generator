@@ -19,4 +19,18 @@ namespace AI_Resume_Generator
 			public string password { get; set; }
             public string process_by { get; set; }
         }
+
+		public class AuthoriseLogin_Request
+		{
+			public string password { get; set; }
+			public string email { get; set; }
+		}
+
+		public class AuthoriseLogin_Response
+		{
+        public int resultvalue { get; set; }
+        public string resultmessage { get; set; }
+        public string password { get; set; }
+    }
+
 }

@@ -39,5 +39,42 @@ namespace AI_Resume_Generator
 			rslt = ConvertDataTable<UserLogin_Response>(dt);
 			return rslt;
 		}
-	}
+
+		public AuthoriseLogin_Response AuthoriseUser(string password, string email)
+		{
+			DataTable dt = new DataTable();
+			string connectionstring = ConfigurationManager.ConnectionStrings["SqlDbConnection"].ConnectionString;
+
+			using (SqlConnection conn = new SqlConnection(connectionstring))
+			{
+				conn.Open();
+				var Transaction = conn.BeginTransaction();
+				var cmd = new SqlCommand("sploginuser", conn);
+				cmd.Parameters.AddWithValue("@i_email", email);
+				cmd.CommandType = CommandType.StoredProcedure;
+				cmd.Transaction = Transaction;
+				SqlDataAdapter da = new SqlDataAdapter(cmd);
+				da.Fill(dt);
+				cmd.Transaction.Commit();
+				da.Dispose();
+				conn.Close();
+			}
+			List<AuthoriseLogin_Response> rslt = new List<AuthoriseLogin_Response>();
+            rslt = ConvertDataTable<AuthoriseLogin_Response>(dt);
+            var verifypassword = HelperFunction.VerifyPassword(password, rslt[0].password);
+			if(verifypassword == true)
+			{
+				rslt[0].resultvalue = 1;
+				rslt[0].resultmessage = "Authorised User";
+
+            }
+			else
+			{
+                rslt[0].resultvalue = 0;
+                rslt[0].resultmessage = "Unauthorised User";
+            }
+			return rslt[0];
+		}	
+
+    }
 }

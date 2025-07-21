@@ -30,7 +30,7 @@ namespace AI_Resume_Generator
 			byte[] salt = new byte[16];
 			Array.Copy(hashbytes, 0, salt, 0, 16);
 
-			var pbkdf2 = new Rfc2898DeriveBytes(inputpassword, salt, 1000000);
+			var pbkdf2 = new Rfc2898DeriveBytes(inputpassword, salt, 100000);
 			byte[] inputhash = pbkdf2.GetBytes(20);
 
 			for (int i = 0; i < 20; i++)

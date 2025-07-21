@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -35,5 +36,25 @@ namespace AI_Resume_Generator
             }
 		}
 
+        [HttpGet]
+        [Route("api/AIGenerator/AuthoriseUser")]
+        public HttpResponseMessage AuthoriseUser (HttpRequestMessage request, string password,string email)
+		{
+			try
+			{
+				HttpResponseMessage result = new HttpResponseMessage();
+				AuthoriseLogin_Response res = new AuthoriseLogin_Response();
+				res = AIGeneratorBal.AuthoriseUser(password, email);
+				result = request.CreateResponse(HttpStatusCode.Created, res);
+                return result;
+            }
+			catch(Exception e)
+			{
+				AuthoriseLogin_Response resobj = new AuthoriseLogin_Response();
+				resobj.resultvalue = -1;
+				resobj.resultmessage = e.Message;
+				return request.CreateResponse<AuthoriseLogin_Response>(HttpStatusCode.BadRequest, resobj);
+            }
+		}
     }
 }
