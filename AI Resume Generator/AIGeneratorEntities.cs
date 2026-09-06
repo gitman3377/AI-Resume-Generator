@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace AI_Resume_Generator
 {
@@ -28,10 +29,13 @@ namespace AI_Resume_Generator
 
 	public class AuthoriseLogin_Response
 	{
-		public int resultvalue { get; set; }
-		public string resultmessage { get; set; }
-		public string password { get; set; }
-	}
+        public int resultvalue { get; set; }
+        public string resultmessage { get; set; }
+        public int userid { get; set; }
+
+        [JsonIgnore]
+        public string password { get; set; }
+    }
 
 	public class GeneralDTO 
 	{
